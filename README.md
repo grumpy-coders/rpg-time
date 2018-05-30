@@ -1,4 +1,4 @@
-# rpg-time
+# RPG Time
 Versa Watchface - Based off the look and feel ( and some images ) from RPG like "Legend of Zelda" and "Final Fantasy".
 
 ## Fonts are bigger than normal and taping on a stat zooms in on that stat.
