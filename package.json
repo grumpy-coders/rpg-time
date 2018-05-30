@@ -1,0 +1,22 @@
+{
+  "fitbit": {
+    "appUUID": "f8b70ca9-8ed0-495a-a275-0cead5f64168",
+    "appType": "clockface",
+    "appDisplayName": "RPG Time",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [
+      "access_activity",
+      "access_user_profile",
+      "access_heart_rate"
+    ],
+    "buildTargets": [
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "RPG Time"
+      }
+    }
+  }
+}
