@@ -20,6 +20,7 @@ Versa Watchface - Based off the look and feel ( and some images ) from RPG like 
 
  ## Resources:
    First off I'll give credit to the resources I'm using (as best as I can remember).
+   
    **gauntlet-silver.png & gauntlet-gold.png**
   	 [Zelda Wiki - Silver Gauntlet](https://zelda.gamepedia.com/Gauntlets)
   	 [Zelda Wiki - GOld Gauntlet](https://zelda.gamepedia.com/File:OoT3D_Silver_Gauntlets_Icon.png)     
