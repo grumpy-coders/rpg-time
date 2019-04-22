@@ -1,23 +1,3 @@
-/*
- * Credit:
- * gauntlet-silver.png & gauntlet-gold.png 
- * 	https://zelda.gamepedia.com/Gauntlets
- * 	https://zelda.gamepedia.com/File:OoT3D_Silver_Gauntlets_Icon.png
- * 	Here's hoping it does not violate copyright.
- * 	The only change to the image was with the file name.
- * stairs.png
- * 	The stairs was cut out of the image from https://kotaku.com/final-fantasy-speedrun-includes-28-minutes-of-walking-u-1686278555
- * boots.png
- * 	The boots was grabbed from http://zelda.wikia.com/wiki/File:Pegasus_Boots_(Four_Swords_Adventures).png
- * boots-pegasus.png
- * 	Was cut from the https://blueamnesiac.deviantart.com/art/ALBW-Pegasus-Boots-421159045
- * heart.png
- * from http://zelda.wikia.com/wiki/File:Heart_Container_(Majora%27s_Mask).png
- * wall.png (middlewallupdated.png)
- * from https://drunkenzebrastudio.wordpress.com/2011/12/11/belated-environments/
- */
-
-
 import clock from "clock";
 import document from "document";
 import {
@@ -97,10 +77,15 @@ heartRateSensor.onreading = function () {
  * @param {stat} stat Stat widget
  */
 function zoomIn(stat) {
-	let zoomed = document.getElementById('zoomed');
-	zoomed.getElementById('icon').href = stat.getElementById('icon').href;
+	let zoomed = document.getElementById('zoomed');	
+	zoomed.getElementById('icon').href = stat.getElementById('icon').href;		
 	zoomed.getElementById('text').text = stat.getElementById('text').text;
 	zoomed.getElementById('description').text = stat.getElementById('description').text;
+	
+	console.log(`stat.description: ${stat.getElementById('description').text}`);
+	console.log(`big.description: ${zoomed.getElementById('description').text}`);
+	console.log(`big.display: ${zoomed.getElementById('description').style.display}`);
+
 	zoomed.style.display = "inline";
 }
 
@@ -116,11 +101,9 @@ function zoomOut() {
  */
 function bindEvents() {
 	let zoomed = document.getElementById('zoomed');
-	// zoomed.getElementById('box').onclick = zoomOut;
 	zoomed.getElementById('icon').onclick = zoomOut;
 	zoomed.getElementById('text').onclick = zoomOut;
 	zoomed.getElementById('description').onclick = zoomOut;
-	// zoomed.getElementById('wallpaper').onclick = zoomOut;
 	bindAllStatClickEvents();
 }
 
@@ -136,7 +119,7 @@ function bindAllStatClickEvents() {
 }
 
 /** @function bindStatClickEvent
- * Binds the onclick of the text, icon and box
+ * Binds the onclick of the text and icon
  */
 function bindStatClickEvent(stat) {
 	stat.getElementById('text').onclick = function () {
