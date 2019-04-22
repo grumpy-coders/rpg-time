@@ -29,5 +29,5 @@ Versa Watchface - Based off the look and feel ( and some images ) from RPG like 
    **boots-pegasus.png** from the https://blueamnesiac.deviantart.com/art/ALBW-Pegasus-Boots-421159045    
    **heart.png** [Zelda Wiki](http://zelda.wikia.com/wiki/File:Heart_Container_(Majora%27s_Mask).png)   
    **wall.png** [MiddleWallUpdated](https://drunkenzebrastudio.wordpress.com/2011/12/11/belated-environments/)
-   **fire.png** [pngimg.com]http://pngimg.com/imgs/nature/flame/
+   **fire.png** [pngimg.com](http://pngimg.com/imgs/nature/flame/)
  
