@@ -46,25 +46,18 @@ export function dayOfWeek(day) {
 	switch (day) {
 		case 0:
 			return 'Sun';
-			break;
 		case 1:
 			return 'Mon';
-			break;
 		case 2:
 			return 'Tue';
-			break;
 		case 3:
 			return 'Wed';
-			break;
 		case 4:
 			return 'Thu';
-			break;
 		case 5:
 			return 'Fri';
-			break;
 		case 6:
 			return 'Sat';
-			break;
 	}
 }
 
@@ -93,9 +86,7 @@ export function hex2a(hex) {
 	var str = '';
 	for (var index = 0; index < hex.length; index += 2) {
 		var val = parseInt(hex.substr(index, 2), 16);
-		if (val) {
-			str += String.fromCharCode(val);
-		}
+		if (val) str += String.fromCharCode(val);
 	}
 	return str.toString();
 }
