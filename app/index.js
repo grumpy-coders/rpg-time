@@ -58,14 +58,16 @@ clock.ontick = (evt) => {
 	} else {
 		batteryIcon.href = './resources/images/gauntlet-silver.png';
 	}
+
 	if (today.local.steps > 10000) {
 		steps.text = (Math.round((today.local.steps / 100)) / 10) + 'k';
 	} else {
-		steps.text = steps.zoomedDisplay;
+		steps.text = tools.addCommas(today.local.steps);
 	}
 	document.getElementById('steps').getElementById('zoomedDisplay').value = today.local.steps;
 
 	distance.text = getDistance(today).pretty;
+
 
 	stairs.text = tools.addCommas(today.adjusted.elevationGain || 0);
 	document.getElementById('stairs').getElementById('zoomedDisplay').value = today.adjusted.elevationGain;
@@ -90,7 +92,6 @@ heartRateSensor.onreading = function () {
 function zoomIn(stat) {
 	let zoomed = document.getElementById('zoomed');
 	zoomed.getElementById('icon').href = stat.getElementById('icon').href;
-
 
 	if (stat.getElementById('zoomedDisplay') == null || typeof stat.getElementById('zoomedDisplay').value === "undefined" || stat.getElementById('zoomedDisplay').value == "0") {
 		zoomed.getElementById('text').text = stat.getElementById('text').text;
@@ -166,6 +167,6 @@ function getDistance(today) {
 	}
 	return {
 		raw: val,
-		pretty: `${val.toFixed(2)}${u}`
+		pretty: `${val.toFixed(1)}${u}`
 	}
 }
