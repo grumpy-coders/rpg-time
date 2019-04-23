@@ -1,3 +1,6 @@
+import {
+	me as device
+} from 'device';
 import clock from "clock";
 import document from "document";
 import {
@@ -17,7 +20,6 @@ import {
 import {
 	today
 } from 'user-activity';
-
 import {
 	display
 } from "display";
@@ -38,6 +40,10 @@ const calories = document.getElementById('calories').getElementById('text');
 bindEvents()
 bindAllStatClickEvents();
 
+if (device.modelName === "Ionic") {
+	document.getElementById('time').y = 230;
+	document.getElementById('date').style.display = "none";
+}
 
 clock.ontick = (evt) => {
 	heartRateSensor.start();
@@ -67,7 +73,6 @@ clock.ontick = (evt) => {
 	document.getElementById('steps').getElementById('zoomedDisplay').value = today.local.steps;
 
 	distance.text = getDistance(today).pretty;
-
 
 	stairs.text = tools.addCommas(today.adjusted.elevationGain || 0);
 	document.getElementById('stairs').getElementById('zoomedDisplay').value = today.adjusted.elevationGain;
@@ -153,7 +158,6 @@ function bindStatClickEvent(stat) {
 		zoomIn(stat)
 	};
 }
-
 
 /*
  * Got from https://github.com/Fitbit/sdk-moment/blob/master/app/simple/activity.js
