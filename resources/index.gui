@@ -1,105 +1,76 @@
 <svg>
-  
+
 	<defs>
-		
+
 		<symbol id="stat" height="65" width="130">
 			<image id="icon" href="" height="45" width="45" x="2" y="0" pointer-events="all" layer="1"/>
-			<text id="text" 
-				text-length="25" 
-				x="47" 
-				y="35" 
-				fill="fb-white" 
-				font-weight="bold" 
-				font-size="40" 
-				pointer-events="all"
-				width="inherit" 
-				layer="1">Status Info</text>
+			<text id="text" text-length="25" x="47" y="35" fill="fb-white" font-weight="bold" font-size="40" pointer-events="all" width="inherit" layer="1">Status Info</text>
 			<text id="description" fill="fb-white" display="none" text-length="50"/>
-      		<image id="wallpaper" display="none" layer="0"/>
+			<var id="zoomedDisplay" value="0"/>
 		</symbol>
-
 
 		<symbol id="stat-full-screen" x="0" y="0" width="100%" height="100%" class="stat" display="none" layer="99" fill="black">
-			<image id="icon" href="" x="100" y="23" height="100" width="100" pointer-events="all" layer="1"/>	
-		
-			<text id="text" 
-				text-length="25" x="50%" y="180" 
-				font-size="70" text-anchor="middle" fill="fb-white" 
-				font-weight="bold" pointer-events="all" layer="1"/>
-
-			<text id="description" 
-				text-length="50" x="50%" y="240" 
-				font-size="50" text-anchor="middle"				
-				fill="fb-white" 
-				font-weight="bold" 
-				pointer-events="all" 
-				layer="1" />
-			
-			<image id="wallpaper" 
-				x="0" 
-				y="0" 
-				width="inherit" 
-				height="inherit" 
-				layer="0" 
-				href="./resources/images/wall.png"/>   
-				
+			<image id="icon" href="" x="100" y="23" height="100" width="100" pointer-events="all" layer="1"/>
+			<text id="text" text-length="25" x="50%" y="180" font-size="70" text-anchor="middle" fill="fb-white" font-weight="bold" pointer-events="all" layer="1"/>
+			<text id="description" text-length="50" x="50%" y="240" font-size="50" text-anchor="middle" fill="fb-white" font-weight="bold" pointer-events="all" layer="1" />
+			<image id="wallpaper" x="0" y="0" width="inherit" height="inherit" layer="0" href="./resources/images/wall.png"/>
 		</symbol>
 
+		<symbol id="right" href="#stat" x="1" class="stat" width="100%"></symbol>
+		<symbol id="left" href="#stat" x="54%" class="stat" width="100%"></symbol>
 
 	</defs>
-  
-	<use id="battery" href="#stat" x="4" y="4" class="stat">
+
+	<use id="battery" href="#right" y="5">
 		<set href="#icon" attributeName="href" to="./resources/images/gauntlet-silver.png"/>
 		<set href="#text" attributeName="text-buffer" to="75%"/>
 		<set href="#description" attributeName="text-buffer" to="Battery %"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
 	</use>
-	
-	<use id="heartRate" href="#stat" x="60%" y="4" class="stat">
+
+	<use id="heartRate" href="#left" y="5">
 		<set href="#icon" attributeName="href" to="./resources/images/heart.png"/>
 		<set href="#text" attributeName="text-buffer" to="999"/>
 		<set href="#description" attributeName="text-buffer" to="Heart Rate"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
 	</use>
-	
-	<use id="distance" href="#stat" x="4" y="64" class="stat">
+
+	<use id="distance" href="#right" y="65">
 		<set href="#icon" attributeName="href" to="./resources/images/boots-pegasus.png"/>
 		<set href="#text" attributeName="text-buffer" to="999.99"/>
 		<set href="#description" attributeName="text-buffer" to="Distance"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
 	</use>
 
-	<use id="stairs" href="#stat" x="60%" y="64" class="stat">
+	<use id="stairs" href="#left" y="65">
 		<set href="#icon" attributeName="href" to="./resources/images/stairs.png"/>
 		<set href="#text" attributeName="text-buffer" to="999"/>
 		<set href="#description" attributeName="text-buffer" to="Stairs"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
 	</use>
 
-	<use id="steps" href="#stat" y="124" class="stat" width="100%">
+	<use id="steps" href="#right" y="125">
 		<set href="#icon" attributeName="href" to="./resources/images/boots.png"/>
 		<set href="#text" attributeName="text-buffer" to="106,583"/>
 		<set href="#description" attributeName="text-buffer" to="Steps"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
 	</use>
-	
+
+	<use id="calories" href="#left" y="125">
+		<set href="#icon" attributeName="href" to="./resources/images/fire.png"/>
+		<set href="#text" attributeName="text-buffer" to="1513"/>
+		<set href="#description" attributeName="text-buffer" to="Calories"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
 	<text id="time"
 		x = "50%"
-		y = "245"
-		fill="fb-purple" 
-		text-length="20" 
-		font-size="80" 
-		text-anchor="middle">
+		y = "245" fill="fb-purple" text-length="20" font-size="80" text-anchor="middle">
 		12:59:59
 	</text>
 
-	<text id="date" text-length="20" class="date" /> 
+	<text id="date" text-length="20" class="date" />
 
-	<use id="zoomed" href="#stat-full-screen" display="none">
-		
-		
-		<!-- <set href="#description" attributeName="x" to="50%"/> -->
-		<!-- <set href="#description" attributeName="text-anchor" to="middle"/> -->
-		<set href="#description" attributeName="y" to="220"/>
-		<set href="#description" attributeName="font-size" to="60"/>
-		<set href="#description" attributeName="text-buffer" to="Hello"/>
+	<use id="zoomed" href="#stat-full-screen" display="none" />
 
-
-	</use>
-  
 </svg>
