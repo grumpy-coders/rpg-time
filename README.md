@@ -9,6 +9,7 @@ Versa Watchface - Based off the look and feel ( and some images ) from RPG like 
   Pegasus Boots = Distance  
   Down Stairs = Stairs  
   Boot = Steps  
+  Fire = Calories  
 
 ## Requested Permissions
   **Activity**
