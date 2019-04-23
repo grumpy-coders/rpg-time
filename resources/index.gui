@@ -65,7 +65,7 @@
 
 	<text id="time"
 		x = "51%"
-		y = "245" fill="fb-purple" text-length="20" font-size="80" text-anchor="middle">
+		y = "241" fill="fb-purple" text-length="20" font-size="80" text-anchor="middle">
 		12:59:59
 	</text>
 
