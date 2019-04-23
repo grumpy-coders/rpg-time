@@ -16,8 +16,8 @@
 			<image id="wallpaper" x="0" y="0" width="inherit" height="inherit" layer="0" href="./resources/images/wall.png"/>
 		</symbol>
 
-		<symbol id="right" href="#stat" x="1" class="stat" width="100%"></symbol>
-		<symbol id="left" href="#stat" x="54%" class="stat" width="100%"></symbol>
+		<symbol id="right" href="#stat" x="0" class="stat" width="100%"></symbol>
+		<symbol id="left" href="#stat" x="53%" class="stat" width="100%"></symbol>
 
 	</defs>
 
@@ -64,7 +64,7 @@
 	</use>
 
 	<text id="time"
-		x = "50%"
+		x = "51%"
 		y = "245" fill="fb-purple" text-length="20" font-size="80" text-anchor="middle">
 		12:59:59
 	</text>
