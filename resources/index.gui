@@ -16,6 +16,16 @@
 			<image id="wallpaper" x="0" y="0" width="inherit" height="inherit" layer="0" href="./resources/images/wall.png"/>
 		</symbol>
 
+		<symbol id="sleep-mode-screen" x="0" y="0" width="100%" height="100%" display="none" layer="99" fill="fb-black">
+			<rect x="0" y="0" width="100%" height="100%" fill="fb-balck" />
+			<use id="btnWeather" fill="fb-red" href="#combo-button-upper-left" layer="0">
+                <set attributeName="href" href="combo-button-icon" to="images\weather.png"/>
+                <set attributeName="href" href="combo-button-icon-press" to="images\weather.png"/>
+                <set attributeName="display" href="combo-button-stroke" to="inline"/>
+            </use>
+			<text id="time" x = "51%" y = "50%" fill="fb-red" text-length="20" font-size="80" text-anchor="middle">12:59:59</text>
+		</symbol>
+
 		<symbol id="right" href="#stat" x="0" class="stat" width="100%"></symbol>
 		<symbol id="left" href="#stat" x="53%" class="stat" width="100%"></symbol>
 
@@ -70,7 +80,7 @@
 	</text>
 
 	<text id="date" text-length="20" class="date" />
-
 	<use id="zoomed" href="#stat-full-screen" display="none" />
+	<use id="sleepmode" href="#sleep-mode-screen" display="none" />
 
 </svg>
