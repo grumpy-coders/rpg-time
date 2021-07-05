@@ -22,9 +22,8 @@ Versa Watchface - Based off the look and feel ( and some images ) from RPG like 
  ## Resources:
    First off I'll give credit to the resources I'm using (as best as I can remember).
    
-   **gauntlet-gold.png**
-  	 [Zelda Wiki - Silver Gauntlet](https://zelda.gamepedia.com/Gauntlets)
-  	 [Zelda Wiki - GOld Gauntlet](https://zelda.gamepedia.com/File:OoT3D_Silver_Gauntlets_Icon.png)     
+   **gauntlet-gold.png**  	 
+  	 [Zelda Wiki - Gold Gauntlet](https://zelda.gamepedia.com/File:OoT3D_Silver_Gauntlets_Icon.png)     
    **stairs.png** The stairs was cut out of the image from [kotaku](https://kotaku.com/final-fantasy-speedrun-includes-28-minutes-of-walking-u-1686278555)   
    **boots.png** was grabbed from [Zelda Wiki](http://zelda.wikia.com/wiki/File:Pegasus_Boots_(Four_Swords_Adventures).png)   
    **boots-pegasus.png** from the https://blueamnesiac.deviantart.com/art/ALBW-Pegasus-Boots-421159045    
