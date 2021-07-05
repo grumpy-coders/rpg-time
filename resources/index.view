@@ -1,0 +1,82 @@
+<svg>
+
+	<defs>
+
+		<symbol id="stat" height="65">
+			<image id="icon" href="" height="50" width="45" x="10" y="0" pointer-events="all"/>
+			<text id="text" text-length="25" x="55" y="35" fill="fb-white" font-weight="bold" font-size="45" pointer-events="all">Status Info</text>
+			<text id="description" fill="fb-white" display="none" text-length="50"/>
+			<var id="zoomedDisplay" value="0"/>
+		</symbol>
+
+		<symbol id="stat-full-screen" x="0" y="0" width="100%" height="100%" class="stat" display="none" layer="99">
+			<image id="icon" href="" x="130" y="35" height="100" width="80" pointer-events="all" layer="1"/>
+			<text id="text" text-length="25" x="50%" y="200" font-size="70" text-anchor="middle" fill="fb-white" font-weight="bold" pointer-events="all" layer="1"/>
+			<text id="description" text-length="50" x="50%" y="260" font-size="50" text-anchor="middle" fill="fb-white" font-weight="bold" pointer-events="all" layer="1" />
+			<image id="wallpaper" x="0" y="0" width="100%" height="100%" layer="0" href="./resources/images/wall.png"/>
+		</symbol>
+
+		<symbol id="sleep-mode-screen" x="0" y="0" width="100%" height="100%" display="none" layer="99">
+			<rect x="0" y="0" width="100%" height="100%"/>
+			<text id="time" x = "50%" y = "50%" fill="fb-plum" text-length="20" font-size="85" text-anchor="middle" font-weight="bold" pointer-events="visible">12:59:59</text>
+			<text id="date" text-length="20" class="date" font-weight="bold" x="50%" y="$" fill="fb-peach" font-size="55" pointer-events="visible"/>
+		</symbol>
+
+		<symbol id="right" href="#stat" x="0" class="stat" width="51%" layer="10"></symbol>
+		<symbol id="left" href="#stat" x="53%" class="stat" width="100%" layer="0"></symbol>
+
+	</defs>
+
+	<use id="battery" href="#right" y="32">
+		<set href="#icon" attributeName="href" to="./resources/images/gauntlet-gold.png"/>
+		<set href="#text" attributeName="text-buffer" to="75%"/>
+		<set href="#description" attributeName="text-buffer" to="Battery %"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<use id="heartRate" href="#left" y="32">
+		<set href="#icon" attributeName="href" to="./resources/images/heart.png"/>
+		<set href="#text" attributeName="text-buffer" to="999"/>
+		<set href="#description" attributeName="text-buffer" to="Heart Rate"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<use id="distance" href="#right" y="87">
+		<set href="#icon" attributeName="href" to="./resources/images/boots-pegasus.png"/>
+		<set href="#text" attributeName="text-buffer" to="999.99"/>
+		<set href="#description" attributeName="text-buffer" to="Distance"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<use id="stairs" href="#left" y="87">
+		<set href="#icon" attributeName="href" to="./resources/images/stairs.png"/>
+		<set href="#text" attributeName="text-buffer" to="999"/>
+		<set href="#description" attributeName="text-buffer" to="Stairs"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<use id="steps" href="#right" y="147">
+		<set href="#icon" attributeName="href" to="./resources/images/boots.png"/>
+		<set href="#text" attributeName="text-buffer" to="106,583"/>
+		<set href="#description" attributeName="text-buffer" to="Steps"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<use id="calories" href="#left" y="147">
+		<set href="#icon" attributeName="href" to="./resources/images/fire.png"/>
+		<set href="#text" attributeName="text-buffer" to="1513"/>
+		<set href="#description" attributeName="text-buffer" to="Calories"/>
+		<set href="#zoomedDisplay" attributeName="value" to="0"/>
+	</use>
+
+	<text id="time"
+		x = "15"
+		y = "260" fill="fb-purple" text-length="20" font-size="81" font-weight="bold" pointer-events="visible">
+		12:59:59
+	</text>
+
+	<text id="date" text-length="20" class="date" font-weight="bold" x="50%" y="100%-30"/>
+	<use id="zoomed" href="#stat-full-screen" display="none" />
+	<use id="sleepmode" href="#sleep-mode-screen" display="none" />
+
+</svg>
