@@ -4,7 +4,7 @@ Versa Watchface - Based off the look and feel ( and some images ) from RPG like 
 ## Fonts are bigger than normal and taping on a stat zooms in on that stat.
 
 ## Stats:
-  Silver Gantlet = Battery  
+  Gold Gantlet = Battery  
   Heart Container = Heart Rate  
   Pegasus Boots = Distance  
   Down Stairs = Stairs  
