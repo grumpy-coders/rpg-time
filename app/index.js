@@ -1,28 +1,15 @@
-import {
-	me as device
-} from 'device';
+import * as tools from './tools.js';
+import * as sm from './settings-manager.js';
+import {me as device} from 'device';
 import clock from "clock";
 import document from "document";
-import {
-	preferences,
-	units
-} from "user-settings";
-import {
-	battery
-} from "power";
-import {
-	charger
-} from "power";
-import * as tools from './tools.js';
-import {
-	HeartRateSensor
-} from "heart-rate";
-import {
-	today
-} from 'user-activity';
-import {
-	display
-} from "display";
+import {preferences, units} from "user-settings";
+import {battery} from "power";
+import {charger} from "power";
+import {settings} from './settings.js'
+import {HeartRateSensor} from "heart-rate";
+import {today} from 'user-activity';
+import {display} from "display";
 
 clock.granularity = "seconds";
 
@@ -31,63 +18,95 @@ const time = document.getElementById('time');
 const batteryText = document.getElementById('battery').getElementById("text");
 const batteryIcon = document.getElementById('battery').getElementById("icon");
 const date = document.getElementById('date');
-const steps = document.getElementById('steps').getElementById("text");
 const heartRate = document.getElementById('heartRate').getElementById('text');
 const heartRateSensor = new HeartRateSensor();
 const distance = document.getElementById('distance').getElementById('text');
+const sleepMode = document.getElementById('sleepmode');
+
+const steps = document.getElementById('steps').getElementById("text");
+const stepsZoomedDisplay = document.getElementById('steps').getElementById('zoomedDisplay');
+
 const stairs = document.getElementById('stairs').getElementById('text');
+const stairsZoomedDisplay = document.getElementById('stairs').getElementById('zoomedDisplay');
+
 const calories = document.getElementById('calories').getElementById('text');
+const caloriesZoomedDisplay = document.getElementById('calories').getElementById('zoomedDisplay');
+
+// const weather_uuid = '000013fe-0000-4000-8000-000000f17b17'
+
+var zoomedStat = null;
+let appSettings = new settings();
+appSettings.load();
+console.log(appSettings.toString());
+
 bindEvents()
-bindAllStatClickEvents();
+
+sm.setupMessaging(appSettings);
 
 if (device.modelName === "Ionic") {
 	document.getElementById('time').y = 230;
 	document.getElementById('date').style.display = "none";
 }
 
-clock.ontick = (evt) => {
+clock.ontick = (evt) => {	
+	//console.log('OnTick');
 	heartRateSensor.start();
 	let currentDate = evt.date;
 	let hours = currentDate.getHours();
-	if (preferences.clockDisplay === '12h') {
-		hours = hours % 12 || 12;
-	} else {
-		hours = tools.zeroPad(hours);
-	}
 
+	hours = preferences.clockDisplay === '12h' ? hours % 12 || 12 : tools.zeroPad(hours);
 	date.text = `${tools.dayOfWeek(currentDate.getDay())} ${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear().toString().substring(2)}`;
 	time.text = `${tools.monoDigits(hours)}:${tools.monoDigits(tools.zeroPad(currentDate.getMinutes()))}:${ tools.monoDigits(tools.zeroPad(currentDate.getSeconds()))}`;
 	batteryText.text = `${Math.floor(battery.chargeLevel)}%`;
-
-	if (charger.connected) {
-		batteryIcon.href = './resourses/images/gauntlet-gold.png';
-	} else {
-		batteryIcon.href = './resources/images/gauntlet-silver.png';
-	}
-
-	if (today.local.steps > 10000) {
-		steps.text = (Math.round((today.local.steps / 100)) / 10) + 'k';
-	} else {
-		steps.text = tools.addCommas(today.local.steps);
-	}
-	document.getElementById('steps').getElementById('zoomedDisplay').value = today.local.steps;
-
 	distance.text = getDistance(today).pretty;
+	
+	batteryIcon.style.display = charger.connected ? 'none' : 'inline';
+
+	steps.text = formatNumber(today.local.steps);
+	stepsZoomedDisplay.value = tools.addCommas(today.local.steps || 0);
 
 	stairs.text = tools.addCommas(today.adjusted.elevationGain || 0);
-	document.getElementById('stairs').getElementById('zoomedDisplay').value = today.adjusted.elevationGain;
+	stairsZoomedDisplay.value = stairs.text;
 
-	if (today.local.calories > 10000) {
-		calories.text = (Math.round((today.local.calories / 100)) / 10) + 'k';
-	} else {
-		calories.text = today.adjusted.calories || 0;
+	calories.text = today.local.calories;
+	caloriesZoomedDisplay.value = tools.addCommas(today.local.calories || 0);
+
+	if (zoomedStat != null) {
+		zoomIn(zoomedStat);
 	}
-	document.getElementById('calories').getElementById('zoomedDisplay').value = today.local.calories;
+
+	if (appSettings.isItSleepTime()) {
+		// console.log(`appSettings.sleepModeEnabled = ${appSettings.sleepModeEnabled} | appSettings.sleepModeStartTime = ${appSettings.sleepModeStartTime} | appSettings.sleepModeEndTime = ${appSettings.sleepModeEndTime}`);
+		sleepMode.getElementById('time').text = time.text;
+		sleepMode.getElementById('date').text = date.text;
+		
+		sleepMode.style.display = "inline";
+
+		if (sleepMode.getElementById('time').onclick == null) {
+			sleepMode.getElementById('time').onclick = function (evt) {
+				appSettings.manualSleepModeOn = false;
+			};
+		}
+
+	} else {
+		if (sleepMode.style.display != "none") {
+			sleepMode.style.display = "none";
+			sleepMode.getElementById('time').onclick = null;
+		}
+	}
 }
 
 heartRateSensor.onreading = function () {
 	heartRate.text = heartRateSensor.heartRate || 0;
 	heartRateSensor.stop();
+}
+
+/** @function formatNumber
+ * Zooms Out of a stat
+ * @param {int} value Number to format
+ */
+function formatNumber(value) {
+	return value > 10000 ? (Math.round((value / 100)) / 10) + 'k' : tools.addCommas(value);
 }
 
 /** @function zoomIn
@@ -105,14 +124,9 @@ function zoomIn(stat) {
 	}
 	zoomed.getElementById('text').text = tools.addCommas(zoomed.getElementById('text').text || 0);
 	zoomed.getElementById('description').text = stat.getElementById('description').text;
-	zoomed.style.display = "inline";
-}
-
-/** @function zoomOut
- * Zooms Out of a stat... Really just hides the zoom widget.
- */
-function zoomOut() {
-	document.getElementById('zoomed').style.display = "none";
+	if (zoomed.style.display != "inline") {
+		zoomed.style.display = "inline";
+	}
 }
 
 /** @function bindEvents
@@ -123,22 +137,19 @@ function bindEvents() {
 	zoomed.getElementById('icon').onclick = zoomOut;
 	zoomed.getElementById('text').onclick = zoomOut;
 	zoomed.getElementById('description').onclick = zoomOut;
-	bindAllStatClickEvents();
 
 	display.onchange = function () {
 		if (display.on) {
 			console.log("Screen Turned On");
 		} else {
 			zoomOut();
-			console.log("Screen Turned Off");
 		}
 	}
-}
 
-/** @function bindAllStatClickEvents
- * Calls bindStatClickEvent for all of the stat wdigets
- */
-function bindAllStatClickEvents() {
+	time.onclick = function () {
+		appSettings.manualSleepModeOn = true;
+	};
+
 	bindStatClickEvent(document.getElementById('battery'));
 	bindStatClickEvent(document.getElementById('heartRate'));
 	bindStatClickEvent(document.getElementById('stairs'));
@@ -151,12 +162,24 @@ function bindAllStatClickEvents() {
  * Binds the onclick of the text and icon
  */
 function bindStatClickEvent(stat) {
-	stat.getElementById('text').onclick = function () {
-		zoomIn(stat)
-	};
-	stat.getElementById('icon').onclick = function () {
-		zoomIn(stat)
-	};
+	stat.getElementById('text').onclick = function () { performZoom(stat); };
+	stat.getElementById('icon').onclick = function () {	performZoom(stat); };
+}
+
+/** @function performZoom
+ * Zooms in on a stat.
+ */
+function performZoom(stat) {
+	zoomedStat = stat;
+	zoomIn(stat);
+}
+
+/** @function zoomOut
+ * Zooms Out of a stat... Really just hides the zoom widget.
+ */
+ function zoomOut() {
+	zoomedStat = null;
+	document.getElementById('zoomed').style.display = "none";
 }
 
 /*
